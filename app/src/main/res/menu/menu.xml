@@ -11,12 +11,12 @@
     <item
         android:id="@+id/nav_new_archive"
         android:title="Compare"
-        android:icon="@drawable/leetcode"
+        android:icon="@drawable/baseline_compare_24"
         app:cnb_iconColor="#FFFFFF"/>
     <item
         android:id="@+id/nav_new_ranking"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Stats"
+        android:icon="@drawable/baseline_leaderboard_24"
+        android:title="Leaderboard"
         app:cnb_iconColor="#FFFFFF"/>
 
     <item
