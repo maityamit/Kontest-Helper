@@ -19,6 +19,7 @@
         android:background="@drawable/greenish_bg">
 
         <ImageView
+            android:id="@+id/resetAllHandles"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/baseline_restart_alt_24"
@@ -59,18 +60,20 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/root_user_lc_ratings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:text="1920"/>
+                    android:text="NA"/>
 
                 <TextView
+                    android:id="@+id/root_user_lc_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(top 4%)"/>
+                    android:text="NA"/>
 
 
 
@@ -101,18 +104,20 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/root_user_cf_ratings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/green"
-                    android:text="1280"/>
+                    android:text="NA"/>
 
                 <TextView
+                    android:id="@+id/root_user_cf_about"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(pupil)"/>
+                    android:text="NA"/>
 
 
 
@@ -143,18 +148,20 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/root_user_cc_ratings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/green"
-                    android:text="1920"/>
+                    android:text="NA"/>
 
                 <TextView
+                    android:id="@+id/root_user_cc_about"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(2 Star)"/>
+                    android:text="NA"/>
 
 
 
@@ -216,6 +223,7 @@
                 android:id="@+id/contest_list_recylerview"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
+                tools:listitem="@layout/upcoming_contests"
                 android:layout_height="match_parent">
 
 
