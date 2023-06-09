@@ -50,21 +50,8 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
 
-    // Local Storage Mandatory
-    private static final String KEY_LC_DATA = "lcData_username";
-    private static final String KEY_CF_DATA = "cfData_username";
-    private static final String KEY_CC_DATA = "ccData_username";
-    private static final String RATINGS_LC_DATA = "lcData_ratings";
-    private static final String RATINGS_CF_DATA = "cfData_ratings";
-    private static final String RATINGS_CC_DATA = "ccData_ratings";
-    private static final String ABOUT_LC_DATA = "lcData_about";
-    private static final String ABOUT_CF_DATA = "cfData_about";
-    private static final String ABOUT_CC_DATA = "ccData_about";
-
-    private static String parameterCodeforces = "";
     List<List<String>> dataList = new ArrayList<>();
     RecyclerView recyclerView;
-    private TextView lc1,lc2,cf1,cf2,cc1,cc2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,69 +61,15 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.contest_list_recylerview);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        lc1 = view.findViewById(R.id.root_user_lc_ratings);
-        lc2 = view.findViewById(R.id.root_user_lc_desc);
-        cf1 = view.findViewById(R.id.root_user_cf_ratings);
-        cf2 = view.findViewById(R.id.root_user_cf_about);
-        cc1 = view.findViewById(R.id.root_user_cc_ratings);
-        cc2 = view.findViewById(R.id.root_user_cc_about);
-        ImageView imageView = (ImageView) view.findViewById(R.id.resetAllHandles);
-
-        String[] lcData = {"_maityamit","1950","knight"};
-        String[] cfData = {"maity_amit_2003","1950","knight"};
-        String[] ccData = {"maityamit","1950","knight"};
-        storeTextData(lcData,cfData,ccData);
-        setRatingsDatafromLocal();
-
-        //ResetAll Handle
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateContestRatings();
-            }
-        });
 
         //API Call for Contests
         retriveAllUpcomingContestsList();
 
-        //Check User data Available or Not
-//        if (retrievedData[0]==null && retrievedData[1]==null && retrievedData[2]==null) {
-//            appearAlertDialogeBox(retrievedData);
-//        }else{
-//            if(retrievedData[0]!=null) retriveLeetCodeRatings(retrievedData[0]);
-//            if(retrievedData[1]!=null) retriveCodeforcesRatings(retrievedData[1]);
-//            if(retrievedData[2]!=null) retriveCodechefRatings(retrievedData[1]);
-//        }
 
         return view;
 
     }
 
-    private void setRatingsDatafromLocal() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String nameLC = preferences.getString(KEY_LC_DATA, null);
-        String nameCF = preferences.getString(KEY_CF_DATA, null);
-        String nameCC = preferences.getString(KEY_CC_DATA, null);
-
-        String ratingLC = preferences.getString(RATINGS_LC_DATA, null);
-        String ratingCF = preferences.getString(RATINGS_CF_DATA, null);
-        String ratingCC = preferences.getString(RATINGS_CC_DATA, null);
-
-        String aboutLC = preferences.getString(ABOUT_LC_DATA, null);
-        String aboutCF = preferences.getString(ABOUT_CF_DATA, null);
-        String aboutCC = preferences.getString(ABOUT_CC_DATA, null);
-
-        lc1.setText(ratingLC);
-        lc2.setText(aboutLC);
-
-        cf1.setText(ratingCF);
-        cf2.setText(aboutCF);
-
-        cc1.setText(ratingCC);
-        cc2.setText(aboutCC);
-
-
-    }
 
     private void retriveAllUpcomingContestsList(){
         String API_URL = "https://kontests.net/api/v1/all";
@@ -191,16 +124,6 @@ public class HomeFragment extends Fragment {
         requestQueue.add(request);
     }
 
-    private void updateContestRatings() {
-
-        String[] str = retrieveUserHandle();
-        String[] _lc = retrieveLetCodeRatings(str[0]);
-        String[] _cf = retrieveCodeforcesRatings(str[1]);
-        String[] _cc = retrieveCodechefRatings(str[2]);
-        storeTextData(_lc,_cf,_cc);
-
-
-    }
 
     private String[] retrieveCodeforcesRatings(String s) {
 
@@ -276,7 +199,6 @@ public class HomeFragment extends Fragment {
                 // Process the extracted elements here
                 for (Element element : elements) {
                     String rating = element.text();
-                    cc1.setText(rating);
                 }
             }
 
@@ -295,37 +217,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void storeTextData(String[] lcData,String[] cfData, String[] ccData) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        //username
-        editor.putString(KEY_LC_DATA, lcData[0]);
-        editor.putString(KEY_CF_DATA, cfData[0]);
-        editor.putString(KEY_CC_DATA, ccData[0]);
 
-        //ratings
-        editor.putString(RATINGS_LC_DATA, lcData[1]);
-        editor.putString(RATINGS_CF_DATA, cfData[1]);
-        editor.putString(RATINGS_CC_DATA, ccData[1]);
-
-        //about
-        editor.putString(ABOUT_LC_DATA, lcData[2]);
-        editor.putString(ABOUT_CF_DATA, cfData[2]);
-        editor.putString(ABOUT_CC_DATA, ccData[2]);
-
-        editor.apply();
-    }
-    private String[] retrieveUserHandle() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String nameLC = preferences.getString(KEY_LC_DATA, null);
-        String nameCF = preferences.getString(KEY_CF_DATA, null);
-        String nameCC = preferences.getString(KEY_CC_DATA, null);
-        String[] str = new String[3];
-        str[0]=nameLC;
-        str[1]=nameCF;
-        str[2]=nameCC;
-        return str;
-    }
 
 
 
